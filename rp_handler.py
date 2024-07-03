@@ -244,3 +244,60 @@ if __name__ == "__main__":
             'handler': handler
         }
     )
+"""
+def process_job_data(job):
+    category = job['input'].get('category', 'default_category')
+    url = job['input'].get('url')
+    batch_size = job['input'].get('batch_size', 1)
+
+    base64_image = image_to_base64(url) if url else None
+    if not base64_image:
+        return {"error": "Failed to process image."}
+
+    # Assuming mock_data is already defined somewhere in the script
+    sd_params = mock_data.get(category, {})
+    return {
+        "api": {
+            "method": "POST",
+            "endpoint": "/sdapi/v1/txt2img"
+        },
+        "payload": {
+            "settings": sd_params,  # Add all the settings as they are
+            "image": base64_image,
+            "batch_size": batch_size
+        }
+    }
+def handler(job):
+    validated_input = validate_input(job)
+    if 'errors' in validated_input:
+        return {'error': '\n'.join(validated_input['errors'])}
+
+    # New processing step
+    job_data = process_job_data(job)
+    if 'error' in job_data:
+        return job_data  # Return error if image processing failed
+
+    validated_api = validate_api(job)
+    if 'errors' in validated_api:
+        return {'error': '\n'.join(validated_api['errors'])}
+
+    endpoint, method, validated_payload = validate_payload(job)
+    if 'errors' in validated_payload:
+        return {'error': '\n'.join(validated_payload['errors'])}
+
+    if 'validated_input' in validated_payload:
+        payload = validated_payload['validated_input']
+    else:
+        payload = validated_payload
+
+    # Use the processed job data in your API call
+    payload.update(job_data.get('payload', {}))
+    try:
+        logger.info(f'Sending {method} request to: /{endpoint}', job['id'])
+        # Choose response handling based on the method
+        response = send_post_request(endpoint, payload, job['id']) if method == 'POST' else send_get_request(endpoint)
+        return handle_response(response)
+    except Exception as e:
+        logger.error(f'An exception was raised: {e}')
+        return {'error': traceback.format_exc(), 'refresh_worker': True}
+    """

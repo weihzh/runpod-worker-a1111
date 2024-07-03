@@ -11,10 +11,12 @@ WORKDIR /
 
 # Upgrade apt packages and install required dependencies
 RUN apt update && \
+    apt-get install -y dos2unix && \
     apt upgrade -y && \
     apt install -y \
       python3-dev \
       python3-pip \
+      python3-venv \
       fonts-dejavu-core \
       rsync \
       git \
@@ -44,9 +46,8 @@ RUN ln -s /usr/bin/python3.10 /usr/bin/python
 RUN pip install requests runpod huggingface_hub
 
 # Add RunPod Handler and Docker container start script
-COPY start.sh rp_handler.py ./
-COPY schemas /schemas
+COPY start_webui.sh ./
 
 # Start the container
-RUN chmod +x /start.sh
-ENTRYPOINT /start.sh
+RUN dos2unix /start_webui.sh && chmod +x /start_webui.sh
+ENTRYPOINT /start_webui.sh

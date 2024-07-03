@@ -36,6 +36,11 @@ API_SCHEMA = {
             'sdapi/v1/loras',
             'sdapi/v1/refresh-loras',
             'controlnet/model_list',
+            'controlnet/module_list',
+            'controlnet/version',
+            'controlnet/settings',
+            '/controlnet/control_types',
+            '/controlnet/detect',
             'v1/download',
             'v1/sync'
         ]
