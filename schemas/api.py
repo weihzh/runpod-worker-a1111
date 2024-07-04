@@ -39,8 +39,8 @@ API_SCHEMA = {
             'controlnet/module_list',
             'controlnet/version',
             'controlnet/settings',
-            '/controlnet/control_types',
-            '/controlnet/detect',
+            'controlnet/control_types',
+            'controlnet/detect',
             'v1/download',
             'v1/sync'
         ]
