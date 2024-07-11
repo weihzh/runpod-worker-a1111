@@ -4,7 +4,7 @@ echo "Worker Initiated"
 
 echo "Symlinking files from Network Volume"
 rm -rf /workspace && \
-  ln -s /runpod-volume /workspace
+  ln -s /runpod-volume /workspace  
 
 if [ -f "/workspace/venv/bin/activate" ]; then
     echo "Starting WebUI API"
@@ -19,8 +19,7 @@ if [ -f "/workspace/venv/bin/activate" ]; then
       --skip-python-version-check \
       --skip-torch-cuda-test \
       --skip-install \
-      --lowram \
-      --opt-sdp-attention \
+      --disable-model-loading-ram-optimization \
       --disable-safe-unpickle \
       --port 3000 \
       --api \
