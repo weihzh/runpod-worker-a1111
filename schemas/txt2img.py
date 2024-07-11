@@ -24,9 +24,9 @@ TXT2IMG_SCHEMA = {
         'default': -1
     },
     'subseed_strength': {
-        'type': int,
+        'type': float,
         'required': False,
-        'default': 0
+        'default': 0.0
     },
     'seed_resize_from_h': {
         'type': int,
@@ -128,7 +128,7 @@ TXT2IMG_SCHEMA = {
         'default': False
     },
     'eta': {
-        'type': int,
+        'type': float,
         'required': False,
         'default': 0
     },
@@ -138,27 +138,27 @@ TXT2IMG_SCHEMA = {
         'default': 0
     },
     's_min_uncond': {
-        'type': int,
+        'type': float,
         'required': False,
         'default': 0
     },
     's_churn': {
-        'type': int,
+        'type': float,
         'required': False,
         'default': 0
     },
     's_tmax': {
-        'type': int,
+        'type': float,
         'required': False,
         'default': 0
     },
     's_tmin': {
-        'type': int,
+        'type': float,
         'required': False,
         'default': 0
     },
     's_noise': {
-        'type': int,
+        'type': float,
         'required': False,
         'default': 0
     },
