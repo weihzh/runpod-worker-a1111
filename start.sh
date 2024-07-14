@@ -13,14 +13,18 @@ if [ -f "/workspace/venv/bin/activate" ]; then
     export LD_PRELOAD="${TCMALLOC}"
     export PYTHONUNBUFFERED=true
     export HF_HOME="/workspace"
+    export CUDA_VISIBLE_DEVICES=0
     python3 /workspace/stable-diffusion-webui/webui.py \
+      -f \
       --xformers \
+      --force-enable-xformers \
+      --opt-sdp-attention \
       --no-half-vae \
       --skip-python-version-check \
-      --skip-torch-cuda-test \
       --skip-install \
       --disable-model-loading-ram-optimization \
       --disable-safe-unpickle \
+      --device-id 0 \
       --port 3000 \
       --api \
       --nowebui \
